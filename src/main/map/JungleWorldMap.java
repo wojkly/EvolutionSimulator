@@ -424,6 +424,9 @@ public class JungleWorldMap implements IWorldMap, IPositionChangeObserver {
         animalsList.remove(animal);
         animal.removeObserver(this);
     }
+
+    //SETTERS AND GETTERS
+
     public void changeTotalEnergy(double x){
         this.totalEnergy += x;
     }
@@ -439,7 +442,6 @@ public class JungleWorldMap implements IWorldMap, IPositionChangeObserver {
         this.followDominantGenotype = followDominantGenotype;
     }
 
-    //getters
     public boolean isFollowDominantGenotype() {
         return followDominantGenotype;
     }

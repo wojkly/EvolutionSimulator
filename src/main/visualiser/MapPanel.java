@@ -24,7 +24,7 @@ public class MapPanel extends JPanel{
     JungleWorldMap map;
     Graphics2D graphics2D;
 
-    static final Color STEPPE_COLOR = new Color(255, 222, 82, 255);
+    static final Color STEPPE_COLOR = new Color(255, 237, 227, 255);
     static final Color JUNGLE_COLOR = new Color(18, 92, 26, 255);
     static final Color GRASS_COLOR = new Color(83, 219, 42, 255);
 

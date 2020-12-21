@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class Main {
+    static final short DELAY_TIME = 0;
+
     public static void main(String[] args){
         if (args.length == 0) {
             AlertBox.display("Wrong file name\n Change it to \"parameters.json\"");
@@ -35,7 +37,7 @@ public class Main {
             simulationFrame1.getPanel().repaint();
             simulationFrame2.getPanel().repaint();
 
-            Timer timer = new Timer(0, e -> {
+            Timer timer = new Timer(DELAY_TIME, e -> {
                 if (!simulationFrame1.getStopped()) {
                     try {
                         simulationFrame1.setStopped(map1.step());

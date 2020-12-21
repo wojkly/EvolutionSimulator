@@ -30,19 +30,18 @@ public enum MapDirection {
     public MapDirection turn(int number){
         int next = 0;
         switch(this){
-            case NORTH: next = 0;
-            case NORTHEAST: next = 1;
-            case EAST: next = 2;
-            case SOUTHEAST: next = 3;
-            case SOUTH: next = 4;
-            case SOUTHWEST: next = 5;
-            case WEST: next = 6;
-            case NORTHWEST: next = 7;
+            case NORTH:
+            case NORTHEAST: next += 1;
+            case EAST: next += 2;
+            case SOUTHEAST: next += 3;
+            case SOUTH: next += 4;
+            case SOUTHWEST: next += 5;
+            case WEST: next += 6;
+            case NORTHWEST: next += 7;
         }
         next += number;
         next = next%8;
         switch(next){
-            case 0: return NORTH;
             case 1: return NORTHEAST;
             case 2: return EAST;
             case 3: return SOUTHEAST;
@@ -50,7 +49,6 @@ public enum MapDirection {
             case 5: return SOUTHWEST;
             case 6: return WEST;
             case 7: return NORTHWEST;
-
             default: return NORTH;
         }
     }

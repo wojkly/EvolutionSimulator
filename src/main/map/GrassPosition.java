@@ -40,21 +40,12 @@ public class GrassPosition implements IGrassPosition {
                 if(!jungleGrass.contains(v))
                     stepGrass.add(v);
             }
-//        System.out.println("jgfree "+jungleGrass.size());
-//        System.out.println("stepfree "+ stepGrass.size());
-//        System.out.println("sum: "+(jungleGrass.size()+stepGrass.size()));
     }
 
     @Override
     public Optional<Vector2d> getStepPosition() {
         if(!stepGrass.isEmpty()){
             int item = new Random().nextInt(stepGrass.size());
-//            int i=0;
-//            for(Vector2d v: stepGrass){
-//                if(i == item)
-//                    return Optional.of(v);
-//                i += 1;
-//            }
             Object[] positions = stepGrass.toArray();
             Vector2d v = (Vector2d) positions[item];
             return Optional.of(v);
@@ -66,12 +57,6 @@ public class GrassPosition implements IGrassPosition {
     public Optional<Vector2d> getJunglePosition() {
         if(!jungleGrass.isEmpty()){
             int item = new Random().nextInt(jungleGrass.size());
-//            int i=0;
-//            for(Vector2d v: jungleGrass){
-//                if(i == item)
-//                    return Optional.of(v);
-//                i += 1;
-//             }
             Object[] positions = jungleGrass.toArray();
             Vector2d v = (Vector2d) positions[item];
             return Optional.of(v);

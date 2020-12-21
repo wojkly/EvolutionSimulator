@@ -23,7 +23,6 @@ public class ReadConfig {
         } catch (IOException e) {
             config = null;
         }
-
         return config;
     }
 

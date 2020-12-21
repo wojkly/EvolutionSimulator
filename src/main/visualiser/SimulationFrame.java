@@ -47,17 +47,7 @@ public class SimulationFrame extends JFrame {
             startButton.setText(stopped ? "START" : "STOP");
         });
         topPanel.add(startButton);
-        //gen stats button
-//        JButton statsButton = new JButton();
-//        statsButton.setText("GENERATE STATS");
-//        statsButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                int asd = new InputBox("AAA",x + PREFERED_WIDTH/2, y + PREFERED_HEIGHT/2).getDate();
-//                System.out.println(asd);
-//            }
-//        });
-//        topPanel.add(statsButton);
+        //add followDominating gen button
         JButton followDomGenButton = new JButton();
         followDomGenButton.setText(!engine.isFollowDominantGenotype() ? "FOLLOW DOM GENOTYPE" : "STOP FOLLOWING");
         followDomGenButton.addActionListener(e -> {
@@ -68,6 +58,7 @@ public class SimulationFrame extends JFrame {
 
         getContentPane().add(topPanel, BorderLayout.PAGE_START);
 
+        // add live stats panel
         JPanel statsPanel = new JPanel();
         statsPanel.setPreferredSize(new Dimension(700,150));
         statsPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));

@@ -9,9 +9,6 @@ public class Grass extends AbstractMapElement{
     }
 
     public String toString(){
-
-//        return "Grass "
-//                + "at: "+ position;
         return "*";
     }
 
