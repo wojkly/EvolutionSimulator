@@ -1,0 +1,5 @@
+Days: 604
+Total placed animals: 1891
+Total planted Grass: 1177
+Most common genotype was: [0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 7, 7, 7, 7]
+Most common genotype count was: 1118

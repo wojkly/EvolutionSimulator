@@ -25,6 +25,8 @@ public class Animal extends AbstractMapElement implements IMapElement, IPosition
     private boolean followedAlphaChild = false;
     private boolean followed = false;
 
+    private boolean isAlive= true;
+
     private ArrayList<IPositionChangeObserver> observers = new ArrayList<>();
 
     public Animal(IWorldMap map, Vector2d initialPosition, double initialEnergy){
@@ -72,7 +74,11 @@ public class Animal extends AbstractMapElement implements IMapElement, IPosition
     @Override
     public void endOfEnergy() {
         if(this.isFollowedAlphaParent())
-            AlertBox.display("The alpha parent, you were following at " + (((JungleWorldMap)this.map).getNumber() == 1 ? "left": "right") + " map died at age: "+this.daysAlive);
+            AlertBox.display("The alpha parent, you were following at " + (((JungleWorldMap)this.map).getNumber() == 1 ? "left": "right") + " map died\n"
+                        +"During the time it was followed it had "+((JungleWorldMap)this.getMap()).getFollowedAlphaChildren()+" children\n"
+                        +"And "+((JungleWorldMap)this.getMap()).getFollowedRelatives()+" other relatives\n"
+                        +"It died at age "+this.daysAlive+" At day "+((JungleWorldMap)this.getMap()).getCurrentDay());
+        this.isAlive = false;
         ArrayList<IPositionChangeObserver> tmpObservers = new ArrayList<>(observers);
         for(IPositionChangeObserver observer: tmpObservers){
             observer.amimalDied(this);
@@ -147,6 +153,10 @@ public class Animal extends AbstractMapElement implements IMapElement, IPosition
         return followedAlphaParent;
     }
 
+    public boolean isAlive() {
+        return isAlive;
+    }
+
     public void setFollowedAlphaParent(boolean followedAlphaParent) {
         this.followedAlphaParent = followedAlphaParent;
         if(!followedAlphaParent)
@@ -173,5 +183,9 @@ public class Animal extends AbstractMapElement implements IMapElement, IPosition
     }
     public void addKid() {
         kids += 1;
+    }
+
+    public IWorldMap getMap() {
+        return map;
     }
 }

@@ -109,11 +109,11 @@ public class MapPanel extends JPanel{
 
 
         if(animal.isFollowedAlphaParent())
-            graphics2D.setColor(new Color(67, 0, 139));
+            graphics2D.setColor(new Color(0, 255, 151));
         else if(animal.isFollowedAlphaChild())
             graphics2D.setColor(new Color(102, 25, 220));
         else if(animal.isFollowed())
-            graphics2D.setColor(new Color(255 - x,255 - x,140));
+            graphics2D.setColor(new Color(255 - x,200,140));
         else if(map.isFollowDominantGenotype() && map.getDominantGenotype().equals(animal.getGenotype()))
             graphics2D.setColor(DOMINANT_GENOTYPE_COLOR);
         else

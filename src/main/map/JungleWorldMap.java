@@ -8,8 +8,10 @@ import mapelements.Animal;
 import mapelements.Genotype;
 import mapelements.Grass;
 import movement.Vector2d;
+import statistics.StatisticsCounter;
 import visualiser.AlertBox;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -38,6 +40,9 @@ public class JungleWorldMap implements IWorldMap, IPositionChangeObserver {
     private int deadAnimals = 0;
     private long deadAnimalsDays = 0;
     private int totalChildren = 0;
+
+    //statisctis counter
+    private StatisticsCounter statisticsCounter = new StatisticsCounter();
 
     private boolean followDominantGenotype = false;
 
@@ -90,7 +95,7 @@ public class JungleWorldMap implements IWorldMap, IPositionChangeObserver {
         this.currentDay = 0;
         this.placeAnimals(this.startAnimals);
     }
-    public boolean step(){
+    public boolean step() throws IOException {
         if(animalsList.size() == 0){
             dominantGenotype = new Genotype(new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0});
             dominantGenNumber = 0;
@@ -107,7 +112,12 @@ public class JungleWorldMap implements IWorldMap, IPositionChangeObserver {
         eatingPhase();
         reproductionPhase();
         setDominantGenotype();
-
+        if(currentDay < StatisticsCounter.GEN_STATS_DAY){
+            statisticsCounter.addThisDayGenotypes(this.currentGenotypes);
+        }else if(currentDay == StatisticsCounter.GEN_STATS_DAY) {
+            statisticsCounter.writeToFile(number);
+            AlertBox.display("Stats succesfully generated");
+        }
         currentDay += 1;
         return  false;
     }
@@ -338,6 +348,7 @@ public class JungleWorldMap implements IWorldMap, IPositionChangeObserver {
             if(!isOccupied(position)){
                 grassHashMap.put(position, (Grass)element);
                 grassList.add((Grass) element);
+                statisticsCounter.addGrass();
                 return true;
             }else
                 return false;
@@ -345,6 +356,7 @@ public class JungleWorldMap implements IWorldMap, IPositionChangeObserver {
             animalsList.add((Animal) element);
             addAnimalToMap((Animal) element, position);
             ((Animal)(element)).addObserver(this);
+            statisticsCounter.addAnimal();
             if(currentGenotypes.containsKey(((Animal) element).getGenotype())) {
                 currentGenotypes.put(((Animal) element).getGenotype(), currentGenotypes.get(((Animal) element).getGenotype()) + 1);
             }
@@ -567,5 +579,21 @@ public class JungleWorldMap implements IWorldMap, IPositionChangeObserver {
 
     public short getNumber() {
         return number;
+    }
+    public int getFollowedAlphaChildren(){
+        int sum = 0;
+        for(Animal animal: animalsList){
+            if(animal.isFollowedAlphaChild())
+                sum += 1;
+        }
+        return sum;
+    }
+    public int getFollowedRelatives(){
+        int sum = 0;
+        for(Animal animal: animalsList){
+            if(animal.isFollowed())
+                sum += 1;
+        }
+        return sum;
     }
 }
